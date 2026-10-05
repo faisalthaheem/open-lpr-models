@@ -1,0 +1,6 @@
+# Model artifacts are published as release assets and Hugging Face files, never
+# committed. Committing them would put ~74 MB of binaries in git history, where
+# they cannot be replaced or withdrawn. manifest.json records the checksums.
+*.onnx
+*.pth
+artifacts/
