@@ -35,6 +35,25 @@ Verify any artifact against the `sha256` in [`manifest.json`](manifest.json)
 before loading it. That file is generated from the artifact bytes themselves,
 not written by hand.
 
+## Demo
+
+Detected and read by the weights in this repository, using the project's own
+public test image (`open-lpr/blackbox/jeep.jpg`, 640×360):
+
+![Plate detected and read as 349253](docs/demo-jeep-detection.jpg)
+
+| | |
+|---|---|
+| plate box | confidence **0.875** |
+| text read | `349253`, confidence **0.99** |
+| end-to-end | **110 ms** (cold, CPU, `onnxruntime`) |
+
+**What this demo does not show.** The plate also carries the Arabic word
+`قطر`, which was **not** transcribed — the default `alphanumeric` charset
+profile emits only alphanumerics, so non-Latin characters are stripped by
+configuration, not by failure. The numeric part is read correctly. This is a
+single image and is not evidence of accuracy; see below.
+
 ## Measured accuracy
 
 Scored on split `v4` — 1,275 images, 1,143 plates, human-corrected ground truth.
