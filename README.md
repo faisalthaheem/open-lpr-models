@@ -40,18 +40,22 @@ not written by hand.
 Detected and read by the weights in this repository, using the project's own
 public test image (`open-lpr/blackbox/jeep.jpg`, 640×360):
 
-![Plate detected and read as 349253](docs/demo-jeep-detection.jpg)
+![Plate detected, registration redacted](docs/demo-jeep-detection.jpg)
 
 | | |
 |---|---|
 | plate box | confidence **0.875** |
-| text read | `349253`, confidence **0.99** |
+| text read | 6 characters, confidence **0.99** |
 | end-to-end | **110 ms** (cold, CPU, `onnxruntime`) |
 
-**What this demo does not show.** The plate also carries the Arabic word
-`قطر`, which was **not** transcribed — the default `alphanumeric` charset
-profile emits only alphanumerics, so non-Latin characters are stripped by
-configuration, not by failure. The numeric part is read correctly. This is a
+The registration is pixelated and the recognised text is masked in this image,
+because a model card should not republish a real plate number. The recogniser
+read it correctly; only the display is redacted.
+
+**What this demo does not show.** The plate also carries Arabic script, which was
+**not** transcribed — the default `alphanumeric` charset profile emits only
+alphanumerics, so non-Latin characters are stripped by configuration, not by
+failure. This is a
 single image and is not evidence of accuracy; see below.
 
 ## Measured accuracy
@@ -163,14 +167,12 @@ plates.**
 
 ## Training imagery is not published
 
-The photographs this model was trained on are community-contributed images
-containing **real licence plates, faces and vehicles**, uploaded without consent
-obtained. Publishing them would create a searchable index of real registration
-numbers, which is a privacy harm the licence terms cannot excuse.
+The detector was trained on community-contributed photographs of real vehicles.
+They are not redistributed here, because that would distribute real licence plate
+numbers at scale.
 
-The reusable contribution is the tooling — dataset conversion, evaluation and
-export in `lpr_app/ml/` in the `open-lpr` repository — and it is already public
-and needs none of that imagery to be useful.
+The tooling used to prepare them is public in `lpr_app/ml/` in the `open-lpr`
+repository, and needs no imagery to be useful.
 
 ## Licence
 
